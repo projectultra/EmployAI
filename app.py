@@ -47,5 +47,63 @@ def index():
 def login():
     return render_template('login.html')
 
+@app.route('/addlink')
+def addlink():
+    return '''<div id="dummylink"></div><br>
+<div class="new-line">
+    <div class="col-md col-sm-12 form-group mb-3" data-for="name">
+        <input type="text" name="name" placeholder="Link Type(linkedin..)" data-form-field="name" class="form-control" value="" id="name-form1-t">
+    </div>
+</div>
+<div class="new-line">
+    <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+        <input type="email" name="email" placeholder="Link" data-form-field="email" class="form-control" value="" id="email-form1-t">
+    </div>
+</div>'''
+
+@app.route('/addeducation')
+def addeducation():
+    return '''<br><div id="dummyeducation"></div><div class="col-md col-sm-12 form-group mb-3" data-for="name">
+                                <input type="text" name="name" placeholder="Standard/Degree" data-form-field="name"
+                                    class="form-control" value="" id="name-form1-t">
+                            </div>
+                            <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                                <input type="email" name="email" placeholder="Percentage/CGPA" data-form-field="email"
+                                    class="form-control" value="" id="email-form1-t">
+                            </div>
+                            <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                                <input type="email" name="email" placeholder="year of completion" data-form-field="email"
+                                    class="form-control" value="" id="email-form1-t">
+                            </div>
+                            <div class="col-12 form-group mb-3" data-for="textarea">
+                                <input type="email" name="email" placeholder="College/School Name" data-form-field="email"
+                                class="form-control" value="" id="email-form1-t">
+                            </div>'''
+                            
+@app.route('/addexperiance')
+def addexperiance():
+    return '''<div class="col-md col-sm-12 form-group mb-3" data-for="name">
+                                <input type="text" name="name" placeholder="Designation" data-form-field="name"
+                                    class="form-control" value="" id="name-form1-t">
+                            </div>
+                            <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                                <input type="email" name="email" placeholder="Start-date" data-form-field="email"
+                                    class="form-control" value="" id="email-form1-t">
+                                    
+                            </div>
+                            <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                                <input type="email" name="email" placeholder="End-date" data-form-field="email"
+                                    class="form-control" value="" id="email-form1-t">
+                                    
+                            </div>
+                            <div class="col-12 form-group mb-3" data-for="textarea">
+                                <input type="text" name="name" placeholder="Organization Name" data-form-field="name"
+                                    class="form-control" value="" id="name-form1-t">
+                            </div>
+                            <div class="col-12 form-group mb-3" data-for="textarea">
+                                <textarea name="textarea" placeholder="Work Experiance" data-form-field="textarea"
+                                    class="form-control form-textarea" id="textarea-form1-t"></textarea>
+                            </div>
+                            <div id="dummyexperiance"></div>'''
 if __name__ == '__main__':
     app.run(debug=True)

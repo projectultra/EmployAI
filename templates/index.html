@@ -1,18 +1,23 @@
 <html>
+
 <head>
     <!-- <title>Cover Letter Generator with Llama 2</title> -->
     <script src="https://unpkg.com/htmx.org@1.8.4"></script>
-    <link rel="stylesheet" type="text/css" href="../style/mobirise2.css">
-    <link rel="stylesheet" type="text/css" href="../style/mobirise-icons-bold.css">
-    <link rel="stylesheet" type="text/css" href="../style/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../style/bootstrap-grid.min.css">
-    <link rel="stylesheet" type="text/css" href="../style/bootstrap-reboot.min.css">
-    <link rel="stylesheet" type="text/css" href="../style/style.css">
-    <link rel="stylesheet" type="text/css" href="../style/styles.css">
-    <link rel="stylesheet" type="text/css" href="../style/style(1).css">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Urbanist:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
-    <link rel="preload" as="style" href="../style/mbr-additional.css"><link rel="stylesheet" href="../style/mbr-additional.css" type="text/css">
-    
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='mobirise2.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='mobirise-icons-bold.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='bootstrap-grid.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='bootstrap-reboot.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style(1).css')}}">
+    <noscript>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Urbanist:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap">
+    </noscript>
+    <link rel="preload" as="style" href="{{url_for('static',filename='mbr-additional.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='mbr-additional.css')}}" type="text/css">
+
     <!-- <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -106,6 +111,7 @@
     </style> -->
 
 </head>
+
 <body>
     <!-- <h1>Cover Letter Generator with Llama 2</h1> -->
     <!-- <form hx-post="/" hx-target="#cover-letter-container">
@@ -162,219 +168,248 @@
     <div id="cover-letter-container"></div> -->
 
     <section data-bs-version="5.1" class="form1 cid-sKAC1m27o7" id="form1-t">
-    
-    
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-    
-                <div class="form-container">
-                    <div class="mbr-form form-wrapper" data-form-type="formoid">
-                        <div class="mbr-section-head mb-3">
-                            <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
-                                <p>Personal Details</p>
-                            </h3>
-                            <!-- <p class="mbr-text mbr-white mbr-fonts-style mb-0 display-7">
-                                let's be in touch, write us a message.
-                            </p> -->
-                        </div>
-                        <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="rbyd2f44lQsx6JcmFzN6bRp10d5RR7Oj2AXZzxuN4ku1Ob7HRpH1D9txOqBXP0q+z4gk42tT/G5NAKUHdnvFFhjuTFyO6onTONIajUO4J6p4APsIyQ5O5mnpB3LBZHKm.fuXM57fmCuTscRMBMoO5f+kx+1vJ6n8cZSycv4DicXmseBvypFMZmGC8DZssPgt+m99HN7zFy4S4666tvN921eH4IIiguBwqk+JkRKqZD21kNiIEOhqV/nwKm4+gRqOT">
-                            <div class="row">
-                                <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out
-                                    the form!</div>
-                                <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
-                                    problem!</div>
+        <form>
+
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+
+                    <div class="form-container">
+                        <div class="mbr-form form-wrapper" data-form-type="formoid">
+                            <div class="mbr-section-head mb-3">
+                                <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
+                                    <p>Personal Details</p>
+                                </h3>
+
                             </div>
+
                             <div class="dragArea row">
                                 <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                                    <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form1-t">
+                                    <input type="text" name="name" placeholder="Name" data-form-field="name"
+                                        class="form-control" value="" id="name-form1-t">
                                 </div>
                                 <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-form1-t">
+                                    <input type="email" name="email" placeholder="E-mail" data-form-field="email"
+                                        class="form-control" value="" id="email-form1-t">
                                 </div>
                                 <div class="col-12 form-group mb-3" data-for="textarea">
-                                <textarea name="textarea" placeholder="Address" data-form-field="textarea" class="form-control form-textarea" id="textarea-form1-t"></textarea>
+                                    <textarea name="textarea" placeholder="Address" data-form-field="textarea"
+                                        class="form-control form-textarea" id="textarea-form1-t"></textarea>
                                 </div>
+                                <div id="dummylink"></div>
                                 <div class="item__buttons-container mt-3">
-                                    <div class="mbr-section-btn item__button"><a class="btn btn-info-outline display-4" href="https://mobiri.se/">Add Links</a></div>
+                                    <div class="mbr-section-btn item__button" hx-get="/addlink" hx-target="#dummylink"
+                                        hx-swap="outerHTML"><a class="btn btn-info-outline display-4">Add Links</a>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-    
-            </div>
-        </div>
-    </section>
-    <section data-bs-version="5.1" class="form1 cid-sKAC1m27o7" id="form1-t">
-    
-    
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-    
-                <div class="form-container">
-                    <div class="mbr-form form-wrapper" data-form-type="formoid">
-                        <div class="mbr-section-head mb-3">
-                            <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
-                                <p>Education</p>
-                            </h3>
-                            <!-- <p class="mbr-text mbr-white mbr-fonts-style mb-0 display-7">
-                                let's be in touch, write us a message.
-                            </p> -->
                         </div>
-                        <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="rbyd2f44lQsx6JcmFzN6bRp10d5RR7Oj2AXZzxuN4ku1Ob7HRpH1D9txOqBXP0q+z4gk42tT/G5NAKUHdnvFFhjuTFyO6onTONIajUO4J6p4APsIyQ5O5mnpB3LBZHKm.fuXM57fmCuTscRMBMoO5f+kx+1vJ6n8cZSycv4DicXmseBvypFMZmGC8DZssPgt+m99HN7zFy4S4666tvN921eH4IIiguBwqk+JkRKqZD21kNiIEOhqV/nwKm4+gRqOT">
-                            <div class="row">
-                                <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out
-                                    the form!</div>
-                                <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
-                                    problem!</div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+
+                    <div class="form-container">
+                        <div class="mbr-form form-wrapper" data-form-type="formoid">
+                            <div class="mbr-section-head mb-3">
+                                <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
+                                    <p>Education</p>
+                                </h3>
                             </div>
+
                             <div class="dragArea row">
                                 <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                                    <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form1-t">
+                                    <input type="text" name="name" placeholder="Standard/Degree" data-form-field="name"
+                                        class="form-control" value="" id="name-form1-t">
                                 </div>
                                 <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-form1-t">
+                                    <input type="email" name="email" placeholder="Percentage/CGPA"
+                                        data-form-field="email" class="form-control" value="" id="email-form1-t">
+                                </div>
+                                <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                                    <input type="email" name="email" placeholder="year of completion"
+                                        data-form-field="email" class="form-control" value="" id="email-form1-t">
                                 </div>
                                 <div class="col-12 form-group mb-3" data-for="textarea">
-                                <textarea name="textarea" placeholder="Address" data-form-field="textarea" class="form-control form-textarea" id="textarea-form1-t"></textarea>
+                                    <input type="email" name="email" placeholder="College/School Name"
+                                        data-form-field="email" class="form-control" value="" id="email-form1-t">
                                 </div>
+                                <div id="dummyeducation"></div>
                                 <div class="item__buttons-container mt-3">
-                                    <div class="mbr-section-btn item__button"><a class="btn btn-info-outline display-4" href="https://mobiri.se/">Add Experiance</a></div>
+                                    <div class="mbr-section-btn item__button" hx-get="/addeducation"
+                                        hx-target="#dummyeducation" hx-swap="outerHTML"><a
+                                            class="btn btn-info-outline display-4">Add Education</a></div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-    
-            </div>
-        </div>
-    </section>
-    <section data-bs-version="5.1" class="form1 cid-sKAC1m27o7" id="form1-t">
-    
-    
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-    
-                <div class="form-container">
-                    <div class="mbr-form form-wrapper" data-form-type="formoid">
-                        <div class="mbr-section-head mb-3">
-                            <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
-                                <p>Experiance</p>
-                            </h3>
-                            <!-- <p class="mbr-text mbr-white mbr-fonts-style mb-0 display-7">
-                                let's be in touch, write us a message.
-                            </p> -->
+
                         </div>
-                        <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="rbyd2f44lQsx6JcmFzN6bRp10d5RR7Oj2AXZzxuN4ku1Ob7HRpH1D9txOqBXP0q+z4gk42tT/G5NAKUHdnvFFhjuTFyO6onTONIajUO4J6p4APsIyQ5O5mnpB3LBZHKm.fuXM57fmCuTscRMBMoO5f+kx+1vJ6n8cZSycv4DicXmseBvypFMZmGC8DZssPgt+m99HN7zFy4S4666tvN921eH4IIiguBwqk+JkRKqZD21kNiIEOhqV/nwKm4+gRqOT">
-                            <div class="row">
-                                <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out
-                                    the form!</div>
-                                <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
-                                    problem!</div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+
+                    <div class="form-container">
+                        <div class="mbr-form form-wrapper" data-form-type="formoid">
+                            <div class="mbr-section-head mb-3">
+                                <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
+                                    <p>Experiance</p>
+                                </h3>
+
                             </div>
+
                             <div class="dragArea row">
                                 <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                                    <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form1-t">
+                                    <input type="text" name="name" placeholder="Designation" data-form-field="name"
+                                        class="form-control" value="" id="name-form1-t">
                                 </div>
                                 <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-form1-t">
+                                    <input type="email" name="email" placeholder="Start-date" data-form-field="email"
+                                        class="form-control" value="" id="email-form1-t">
+
+                                </div>
+                                <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                                    <input type="email" name="email" placeholder="End-date" data-form-field="email"
+                                        class="form-control" value="" id="email-form1-t">
+
                                 </div>
                                 <div class="col-12 form-group mb-3" data-for="textarea">
-                                <textarea name="textarea" placeholder="Address" data-form-field="textarea" class="form-control form-textarea" id="textarea-form1-t"></textarea>
+                                    <input type="text" name="name" placeholder="Organization Name"
+                                        data-form-field="name" class="form-control" value="" id="name-form1-t">
                                 </div>
+                                <div class="col-12 form-group mb-3" data-for="textarea">
+                                    <textarea name="textarea" placeholder="Work Experiance" data-form-field="textarea"
+                                        class="form-control form-textarea" id="textarea-form1-t"></textarea>
+                                </div>
+                                <div id="dummyexperiance"></div>
                                 <div class="item__buttons-container mt-3">
-                                    <div class="mbr-section-btn item__button"><a class="btn btn-info-outline display-4" href="https://mobiri.se/">Add Experiance</a></div>
+                                    <div class="mbr-section-btn item__button" hx-get="/addexperiance"
+                                        hx-target="#dummyexperiance" hx-swap="outerHTML"><a
+                                            class="btn btn-info-outline display-4">Add Experiance</a></div>
                                 </div>
+
                             </div>
-                        </form>
-                    </div>
-                </div>
-    
-            </div>
-        </div>
-    </section>
-    <section data-bs-version="5.1" class="form1 cid-sKAC1m27o7" id="form1-t">
-    
-    
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-    
-                <div class="form-container">
-                    <div class="mbr-form form-wrapper" data-form-type="formoid">
-                        <div class="mbr-section-head mb-3">
-                            <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
-                                <p>Skills</p>
-                            </h3>
-                            
                         </div>
-                        <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="rbyd2f44lQsx6JcmFzN6bRp10d5RR7Oj2AXZzxuN4ku1Ob7HRpH1D9txOqBXP0q+z4gk42tT/G5NAKUHdnvFFhjuTFyO6onTONIajUO4J6p4APsIyQ5O5mnpB3LBZHKm.fuXM57fmCuTscRMBMoO5f+kx+1vJ6n8cZSycv4DicXmseBvypFMZmGC8DZssPgt+m99HN7zFy4S4666tvN921eH4IIiguBwqk+JkRKqZD21kNiIEOhqV/nwKm4+gRqOT">
-                            
-                            <div class="dragArea row">
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                                    <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form1-t">
-                                </div>
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-form1-t">
-                                </div>
-                                <div class="col-12 form-group mb-3" data-for="textarea">
-                                <textarea name="textarea" placeholder="Address" data-form-field="textarea" class="form-control form-textarea" id="textarea-form1-t"></textarea>
-                                </div>
-                                <div class="item__buttons-container mt-3">
-                                    <div class="mbr-section-btn item__button"><a class="btn btn-info-outline display-4" href="https://mobiri.se/">Add Skills</a></div>
-                                </div>
-                            </div>
-                        </form>
+
                     </div>
                 </div>
-    
-            </div>
-        </div>
-    </section>
-    <section data-bs-version="5.1" class="form1 cid-sKAC1m27o7 " id="form1-t">
-    
-    
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-    
-                <div class="form-container">
-                    <div class="mbr-form form-wrapper" data-form-type="formoid">
-                        <div class="mbr-section-head mb-3">
-                            <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
-                                <p>Projects</p>
-                            </h3>
-                            <!-- <p class="mbr-text mbr-white mbr-fonts-style mb-0 display-7">
-                                let's be in touch, write us a message.
-                            </p> -->
+
+
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+
+                        <div class="form-container">
+                            <div class="mbr-form form-wrapper" data-form-type="formoid">
+                                <div class="mbr-section-head mb-3">
+                                    <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
+                                        <p>Skills</p>
+                                    </h3>
+                                </div>
+                                <div class="dragArea row">
+
+                                    <div class="col-12 form-group mb-3" data-for="textarea">
+                                        <input type="text" class="form-control" placeholder="skills" id="mainSkill" disabled
+                                            class="form-control">
+                                    </div>
+                                    <div class="col-12 form-group mb-3" data-for="textarea">
+                                        <input type="text" class="form-control" placeholder="Enter skill" id="inputSkill" class="form-control"
+                                            id="name-form1-t">
+                                    </div>
+                                    <div class="item__buttons-container mt-3">
+                                        <div class="mbr-section-btn item__button"><p
+                                                class="btn btn-info-outline display-4" onclick="addSkill()">Add
+                                                Skill</p></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="rbyd2f44lQsx6JcmFzN6bRp10d5RR7Oj2AXZzxuN4ku1Ob7HRpH1D9txOqBXP0q+z4gk42tT/G5NAKUHdnvFFhjuTFyO6onTONIajUO4J6p4APsIyQ5O5mnpB3LBZHKm.fuXM57fmCuTscRMBMoO5f+kx+1vJ6n8cZSycv4DicXmseBvypFMZmGC8DZssPgt+m99HN7zFy4S4666tvN921eH4IIiguBwqk+JkRKqZD21kNiIEOhqV/nwKm4+gRqOT">
-                            <div class="row">
-                                <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out
-                                    the form!</div>
-                                <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
-                                    problem!</div>
-                            </div>
-                            <div class="dragArea row">
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                                    <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form1-t">
-                                </div>
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-form1-t">
-                                </div>
-                                <div class="col-12 form-group mb-3" data-for="textarea">
-                                <textarea name="textarea" placeholder="Address" data-form-field="textarea" class="form-control form-textarea" id="textarea-form1-t"></textarea>
-                                </div>
-                                <div class="item__buttons-container mt-3">
-                                    <div class="mbr-section-btn item__button"><a class="btn btn-info-outline display-4" href="https://mobiri.se/">Add Projects</a></div>
-                                </div>
-                            
-                            </div>
-                        </form>
                     </div>
+
+
                 </div>
-    
-            </div>
-        </div>
+
+
+
+                <!-- <div class="container-fluid">
+                    <div class="row justify-content-center">
+
+                        <div class="form-container">
+                            <div class="mbr-form form-wrapper" data-form-type="formoid">
+                                <div class="mbr-section-head mb-3">
+                                    <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
+                                        <p>Projects</p>
+                                    </h3>
+
+                                </div>
+
+                                <div class="dragArea row">
+                                    <div class="col-md col-sm-12 form-group mb-3" data-for="name">
+                                        <input type="text" name="name" placeholder="Name" data-form-field="name"
+                                            class="form-control" value="" id="name-form1-t">
+                                    </div>
+                                    <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                                        <input type="email" name="email" placeholder="E-mail" data-form-field="email"
+                                            class="form-control" value="" id="email-form1-t">
+                                    </div>
+                                    <div class="col-12 form-group mb-3" data-for="textarea">
+                                        <textarea name="textarea" placeholder="Address" data-form-field="textarea"
+                                            class="form-control form-textarea" id="textarea-form1-t"></textarea>
+                                    </div>
+                                    <div class="item__buttons-container mt-3">
+                                        <div class="mbr-section-btn item__button"><a
+                                                class="btn btn-info-outline display-4" href="https://mobiri.se/">Add
+                                                Projects</a></div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div> -->
+        </form>
     </section>
-   
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function addSkill() {
+            const inputSkill = document.getElementById('inputSkill').value.trim();
+            if (inputSkill !== '') {
+                const mainSkill = document.getElementById('mainSkill');
+                mainSkill.value += (mainSkill.value ? '  ||  ' : '') + inputSkill;
+                document.getElementById('inputSkill').value = '';
+            }
+        }
+
+        function selectSkill(skill) {
+            const mainSkill = document.getElementById('mainSkill');
+            mainSkill.value += (mainSkill.value ? ' | ' : '') + skill;
+            document.getElementById('inputSkill').value = '';
+        }
+
+        document.getElementById('inputSkill').addEventListener('input', function () {
+            const input = this.value.trim();
+            const dropdown = document.getElementById('skillDropdown');
+            if (input) {
+                dropdown.style.display = 'block';
+            } else {
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
+
+
 </body>
+
 </html>
