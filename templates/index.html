@@ -1,415 +1,409 @@
-<html>
+{% extends 'base.html'%}
+{%block content%}
 
-<head>
-    <!-- <title>Cover Letter Generator with Llama 2</title> -->
-    <script src="https://unpkg.com/htmx.org@1.8.4"></script>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='mobirise2.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='mobirise-icons-bold.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='bootstrap-grid.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='bootstrap-reboot.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='styles.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style(1).css')}}">
-    <noscript>
-        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Urbanist:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap">
-    </noscript>
-    <link rel="preload" as="style" href="{{url_for('static',filename='mbr-additional.css')}}">
-    <link rel="stylesheet" href="{{url_for('static',filename='mbr-additional.css')}}" type="text/css">
-
-    <!-- <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #333;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        form {
-            background-color: #444;
-            padding: 50px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            margin-left: 200px;
-            margin-right:200px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 3px;
-            background-color: #777;
-            color: #fff;
-        }
-        input[type="email"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 3px;
-            background-color: #777;
-            color: #fff;
-        }
-        input[type="tel"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 3px;
-            background-color: #777;
-            color: #fff;
-        }
-
-        button[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-
-        #cover-letter-container {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #444;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            white-space: pre-wrap;
-        }
-    </style> -->
-
-</head>
-
-<body>
-    <!-- <h1>Cover Letter Generator with Llama 2</h1> -->
-    <!-- <form hx-post="/" hx-target="#cover-letter-container">
-        <h3>Cover Letter Details</h3>
-        <div class="info">
-            <h3>Personal Details</h3>
-        <label for="user_name">Name:</label>
-        <input type="text" id="user_name" name="user_name" required><br>
-        <label for="user_email">Email:</label>
-        <input type="email" id="user_email" name="user_email" required><br>
-        <label for="user_phone">Phone Number:</label>
-        <input type="tel" id="user_phone" name="user_phone" required><br>
-        <label for="user_address">Address:</label>
-        <input type="text" id="user_address" name="user_address" required><br>
-        </div>
-        <div class="info">
-            <h3>Education</h3>
-            <div id="education_temp"></div>
-            <p hx-get="/getEducation" hx-target="#education-temp" hx-post-swap="afterend">+Add Education</p>
-        </div>
-        <div class="info">
-            <h3>Experience</h3>
-            <div id="experiance_temp"></div>
-            <p hx-get="/getEducation" hx-target="#education-temp" hx-post-swap="afterend">+Add Education</p>
-        </div>
-        <div class="info">
-            <h3>Skills</h3>
-            <p hx-get="/getEducation" hx-target="#education-temp" hx-post-swap="afterend">+Add Education</p>
-        </div>
-        <div class="info">
-            <h3>Projects</h3>
-            <p hx-get="/getEducation" hx-target="#education-temp" hx-post-swap="afterend">+Add Education</p>
-        </div>
-        <label for="company">Company Name:</label>
-        <input type="text" id="company" name="company" required><br>
-
-        <label for="manager">Hiring Manager:</label>
-        <input type="text" id="manager" name="manager" required><br>
-
-        <label for="role">Job Title:</label>
-        <input type="text" id="role" name="role" required><br>
-
-        <label for="referral">How did you find out about this opportunity?:</label>
-        <input type="text" id="referral" name="referral" required><br>
-
-        <label for="prompt_input">Paste the job description:</label>
-        <textarea id="prompt_input" name="prompt_input" required></textarea><br>
-
-        <label for="temp">AI Temperature (0 to 1):</label>
-        <input type="number" id="temp" name="temp" min="0" max="1" step="0.1" value="0.5" required><br>
-
-        <button type="submit">Generate Cover Letter</button>
-    </form>
-    <div id="cover-letter-container"></div> -->
-
-    <section data-bs-version="5.1" class="form1 cid-sKAC1m27o7" id="form1-t">
-        <form>
-
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-
-                    <div class="form-container">
-                        <div class="mbr-form form-wrapper" data-form-type="formoid">
-                            <div class="mbr-section-head mb-3">
-                                <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
-                                    <p>Personal Details</p>
-                                </h3>
-
-                            </div>
-
-                            <div class="dragArea row">
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                                    <input type="text" name="name" placeholder="Name" data-form-field="name"
-                                        class="form-control" value="" id="name-form1-t">
-                                </div>
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="E-mail" data-form-field="email"
-                                        class="form-control" value="" id="email-form1-t">
-                                </div>
-                                <div class="col-12 form-group mb-3" data-for="textarea">
-                                    <textarea name="textarea" placeholder="Address" data-form-field="textarea"
-                                        class="form-control form-textarea" id="textarea-form1-t"></textarea>
-                                </div>
-                                <div id="dummylink"></div>
-                                <div class="item__buttons-container mt-3">
-                                    <div class="mbr-section-btn item__button" hx-get="/addlink" hx-target="#dummylink"
-                                        hx-swap="outerHTML"><a class="btn btn-info-outline display-4">Add Links</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-
-                    <div class="form-container">
-                        <div class="mbr-form form-wrapper" data-form-type="formoid">
-                            <div class="mbr-section-head mb-3">
-                                <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
-                                    <p>Education</p>
-                                </h3>
-                            </div>
-
-                            <div class="dragArea row">
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                                    <input type="text" name="name" placeholder="Standard/Degree" data-form-field="name"
-                                        class="form-control" value="" id="name-form1-t">
-                                </div>
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="Percentage/CGPA"
-                                        data-form-field="email" class="form-control" value="" id="email-form1-t">
-                                </div>
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="year of completion"
-                                        data-form-field="email" class="form-control" value="" id="email-form1-t">
-                                </div>
-                                <div class="col-12 form-group mb-3" data-for="textarea">
-                                    <input type="email" name="email" placeholder="College/School Name"
-                                        data-form-field="email" class="form-control" value="" id="email-form1-t">
-                                </div>
-                                <div id="dummyeducation"></div>
-                                <div class="item__buttons-container mt-3">
-                                    <div class="mbr-section-btn item__button" hx-get="/addeducation"
-                                        hx-target="#dummyeducation" hx-swap="outerHTML"><a
-                                            class="btn btn-info-outline display-4">Add Education</a></div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-
-                    <div class="form-container">
-                        <div class="mbr-form form-wrapper" data-form-type="formoid">
-                            <div class="mbr-section-head mb-3">
-                                <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
-                                    <p>Experiance</p>
-                                </h3>
-
-                            </div>
-
-                            <div class="dragArea row">
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                                    <input type="text" name="name" placeholder="Designation" data-form-field="name"
-                                        class="form-control" value="" id="name-form1-t">
-                                </div>
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="Start-date" data-form-field="email"
-                                        class="form-control" value="" id="email-form1-t">
-
-                                </div>
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="End-date" data-form-field="email"
-                                        class="form-control" value="" id="email-form1-t">
-
-                                </div>
-                                <div class="col-12 form-group mb-3" data-for="textarea">
-                                    <input type="text" name="name" placeholder="Organization Name"
-                                        data-form-field="name" class="form-control" value="" id="name-form1-t">
-                                </div>
-                                <div class="col-12 form-group mb-3" data-for="textarea">
-                                    <textarea name="textarea" placeholder="Work Experiance" data-form-field="textarea"
-                                        class="form-control form-textarea" id="textarea-form1-t"></textarea>
-                                </div>
-                                <div id="dummyexperiance"></div>
-                                <div class="item__buttons-container mt-3">
-                                    <div class="mbr-section-btn item__button" hx-get="/addexperiance"
-                                        hx-target="#dummyexperiance" hx-swap="outerHTML"><a
-                                            class="btn btn-info-outline display-4">Add Experiance</a></div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div class="container-fluid">
-                    <div class="row justify-content-center">
-
-                        <div class="form-container">
-                            <div class="mbr-form form-wrapper" data-form-type="formoid">
-                                <div class="mbr-section-head mb-3">
-                                    <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
-                                        <p>Skills</p>
-                                    </h3>
-                                </div>
-                                <div class="dragArea row">
-
-                                    <div class="col-12 form-group mb-3" data-for="textarea">
-                                        <input type="text" class="form-control" placeholder="skills" id="mainSkill" disabled
-                                            class="form-control">
-                                    </div>
-                                    <div class="col-12 form-group mb-3" data-for="textarea">
-                                        <input type="text" class="form-control" placeholder="Enter skill" id="inputSkill" class="form-control"
-                                            id="name-form1-t">
-                                    </div>
-                                    <div class="item__buttons-container mt-3">
-                                        <div class="mbr-section-btn item__button"><p
-                                                class="btn btn-info-outline display-4" onclick="addSkill()">Add
-                                                Skill</p></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-
-
-                <!-- <div class="container-fluid">
-                    <div class="row justify-content-center">
-
-                        <div class="form-container">
-                            <div class="mbr-form form-wrapper" data-form-type="formoid">
-                                <div class="mbr-section-head mb-3">
-                                    <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
-                                        <p>Projects</p>
-                                    </h3>
-
-                                </div>
-
-                                <div class="dragArea row">
-                                    <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                                        <input type="text" name="name" placeholder="Name" data-form-field="name"
-                                            class="form-control" value="" id="name-form1-t">
-                                    </div>
-                                    <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                        <input type="email" name="email" placeholder="E-mail" data-form-field="email"
-                                            class="form-control" value="" id="email-form1-t">
-                                    </div>
-                                    <div class="col-12 form-group mb-3" data-for="textarea">
-                                        <textarea name="textarea" placeholder="Address" data-form-field="textarea"
-                                            class="form-control form-textarea" id="textarea-form1-t"></textarea>
-                                    </div>
-                                    <div class="item__buttons-container mt-3">
-                                        <div class="mbr-section-btn item__button"><a
-                                                class="btn btn-info-outline display-4" href="https://mobiri.se/">Add
-                                                Projects</a></div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div> -->
-        </form>
-    </section>
+<section data-bs-version="5.1" class="header1 cid-sKtEe0wHXn" id="header1-3">
 
     
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        function addSkill() {
-            const inputSkill = document.getElementById('inputSkill').value.trim();
-            if (inputSkill !== '') {
-                const mainSkill = document.getElementById('mainSkill');
-                mainSkill.value += (mainSkill.value ? '  ||  ' : '') + inputSkill;
-                document.getElementById('inputSkill').value = '';
-            }
-        }
+    
+    <div class="container_border">
+        <div class="wrapper">
+            <div class="align-center text-wrapper container-fluid">
+                <div class="row justify-content-center">
+                    <div class="content-container">
+                        <div class="content">
+                            <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-2">Create your<br><strong>Creative design</strong></h1>
+                            <p class="mbr-text mbr-white mbr-fonts-style display-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <div class="mbr-section-btn mt-4"><a class="btn btn-info-outline display-7" href="https://mobiri.se/">GET STARTED</a></div>
+                        </div>
+                    </div>
 
-        function selectSkill(skill) {
-            const mainSkill = document.getElementById('mainSkill');
-            mainSkill.value += (mainSkill.value ? ' | ' : '') + skill;
-            document.getElementById('inputSkill').value = '';
-        }
+                </div>
+            </div>
+        </div>
+    </div>
 
-        document.getElementById('inputSkill').addEventListener('input', function () {
-            const input = this.value.trim();
-            const dropdown = document.getElementById('skillDropdown');
-            if (input) {
-                dropdown.style.display = 'block';
-            } else {
-                dropdown.style.display = 'none';
-            }
-        });
-    </script>
+</section>
+
+<section data-bs-version="5.1" class="header2 cid-sKzntZalJl" id="header2-q">
+
+	
+	
+	<div class="container-fluid">
+		<div class="wrapper">
+			<div class="row justify-content-center">
+				<div class="col-12 col-md custom-block custom-block_left">
+                    <div class="card-wrapper">
+                        <div class="card-box align-left">
+                            <div class="card-title-box mb-4">
+                                <h4 class="card-title mbr-fonts-style mb-0 display-1"><strong>Creating your own unique&nbsp;<span class="color-text"><b>world</b></span></strong><strong>&nbsp;-start with&nbsp;<span class="color-text"><b>design.</b></span></strong></h4>
+
+                            </div>
+                            <p class="mbr-text mbr-fonts-style mb-0 display-7">
+                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum..
+                            </p>
+                            
+                        </div>
+                        <div class="section-btn">
+                            <a class="btn-custom" href="https://mobiri.se/">
+                                <span class="mbr-iconfont mobi-mbri-up mobi-mbri" style="font-size: 42px; color: rgb(255, 255, 255); fill: rgb(255, 255, 255);"></span>
+                            </a>
+                        </div>
+                    </div>
+				</div>
+				<div class="col-12 col-lg-5 image-wrapper">
+					<img src="./Creative Design Demo_files/2.jpg" alt="Mobirise">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section data-bs-version="5.1" class="header2 cid-sKAC4letsz" id="header2-u">
+
+	
+	
+	<div class="container-fluid">
+		<div class="wrapper">
+			<div class="row justify-content-center">
+				<div class="col-12 col-md custom-block custom-block_left">
+                    <div class="card-wrapper">
+                        <div class="card-box align-left">
+                            <div class="card-title-box mb-4">
+                                <h4 class="card-title mbr-fonts-style mb-0 display-1">About <strong>Us</strong></h4>
+
+                            </div>
+                            <p class="mbr-text mbr-fonts-style mb-0 display-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+<br>suscipit orci eu pellentesque. Nullam consectetur dolor vel ex ullamcorper, non viverra neque aliquet. Vivamus sed nulla rhoncus massa malesuada iaculis.</p>
+                            <div class="buttons-container mt-3">
+                                <div class="mbr-section-btn item-button"><a class="btn btn-info-outline display-4" href="https://mobiri.se/">GET STARTED</a></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+				</div>
+				<div class="col-12 col-lg-7 image-wrapper">
+					<img src="./Creative Design Demo_files/team7-1280x914.jpg" alt="Mobirise">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section data-bs-version="5.1" class="features7 cid-sKtEohlrok" id="features7-7">
+    
+    
+    <div class="container-fluid">
+        <div class="wrapper">
+            <div class="cards-container">
+                <div class="title-text-container text-info">
+                    <div class="mbr-section-title mbr-section-title__container">
+                        <h3 class="mbr-section-title mbr-fonts-style text-info mb-0 display-2">
+                            <p class="mbr-section-title mb-0"><strong>4</strong>&nbsp;<strong>Our</strong> Features</p>
+                        </h3>
+                    </div>
+                </div>
+                <div class="row justify-content-center text-info">
+                    <div class="card col-12 col-lg-6">
+                        <p class="transparent-number mb-0">1</p>
+                        <div class="card__title-container">
+                            <h3 class="mbr-fonts-style text-info card_title mb-3 display-5">
+                                <p class="card_title mb-0">
+                                    We build custom products&nbsp;</p>
+                            </h3>
+                            <p class="mbr-text mbr-fonts-style card_text display-7">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card col-12 col-lg-6">
+                        <p class="transparent-number mb-0">2</p>
+                        <div class="card__title-container">
+                            <h3 class="mbr-fonts-style text-info card_title mb-3 display-5">
+                                <p class="card_title mb-0">
+                                    We build creative design&nbsp;</p>
+                            </h3>
+                            <p class="mbr-text mbr-fonts-style card_text display-7">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="features7 cid-sKtEozQ91N" id="features8-8">
+    
+    
+    <div class="container-fluid">
+        <div class="wrapper">
+            <div class="cards-container">
+                
+                <div class="row justify-content-center text-info">
+                    <div class="card col-12 col-lg-6">
+                        <p class="transparent-number mb-0">3</p>
+                        <div class="card__title-container">
+                            <h3 class="mbr-fonts-style text-info card_title mb-3 display-5">
+                                <p class="card_title mb-0">
+                                    We build non-standard design</p>
+                            </h3>
+                            <p class="mbr-text mbr-fonts-style card_text display-7">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card col-12 col-lg-6">
+                        <p class="transparent-number mb-0">4</p>
+                        <div class="card__title-container">
+                            <h3 class="mbr-fonts-style text-info card_title mb-3 display-5">
+                                <p class="card_title mb-0">
+                                    We build peculiar products</p>
+                            </h3>
+                            <p class="mbr-text mbr-fonts-style card_text display-7">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="features3 cid-sKtGLzeXKX" id="features3-j">
+
+    
+
+    
+
+    <div class="container-fluid">
+        <div class="mbr-section-head">
+            <h4 class="mbr-fonts-style mb-0 display-2">
+                <p class="mbr-white title-text mb-0"><strong>Our</strong>Work</p>
+            </h4>
+        </div>
+        <div class="row col-12">
+            <div class="col-12 col-lg-6 text-container">
+                <div class="text-wrapper">
+                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-2">
+                        <p>Hato Salon</p>
+                    </h1>
+                    <p class="mbr-text mbr-fonts-style display-4">
+                        PREMIUM FURNITURE BOTIQUE
+                    </p>
+                    <div class="item__buttons-container mt-3">
+                        <div class="mbr-section-btn item__button"><a class="btn btn-info-outline display-4" href="https://mobiri.se/">LEAN MORE</a></div>
+                    </div>
+                    <div class="item__buttons-container item__buttons-container_round mt-3">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 image-wrapper">
+                <div class="img-container">
+                    <img src="./Creative Design Demo_files/features1-1280x720.jpg" alt="Mobirise">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="features4 cid-sKtGODAGuy" id="features4-k">
+
+    
+
+    
+
+    <div class="container-fluid">
+        
+        <div class="row col-12">
+            <div class="col-12 col-lg-6 text-container">
+                <div class="text-wrapper">
+                    <h1 class="mbr-section-title mbr-fonts-style mb-3 display-2">
+                        <p>Cosyhome</p>
+                    </h1>
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        HOME ACCESSORIES STORE
+                    </p>
+                    <div class="item__buttons-container mt-3">
+                        <div class="mbr-section-btn item__button"><a class="btn btn-info-outline display-4" href="https://mobiri.se/">LEAN MORE</a></div>
+<!--                        <div mbr-buttons mbr-theme-style="display-4" class="mbr-section-btn item__button" data-toolbar="-mbrBtnMove" >-->
+<!--                           -->
+<!--                        </div>-->
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 image-wrapper">
+                <div class="img-container">
+                    <img src="./Creative Design Demo_files/features3-1280x720.jpg" alt="Mobirise">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
-</body>
 
-</html>
+<section data-bs-version="5.1" class="video1 cid-sKtGHNUrbw" id="video1-i">
+    
+    
+    <div class="align-center container">
+        <div class="mbr-section-head">
+            <h4 class="mbr-section-title mbr-fonts-style mb-0 display-2">
+                <strong>View in Action</strong></h4>
+            <h5 class="mbr-section-subtitle mbr-fonts-style mb-0 mt-2 display-7">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris felis, faucibus at tincidunt vel, ultrices vitae mauris. Pellentesque ante.</h5>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-12 col-lg-10">
+                <div class="box">
+                    <div class="mbr-media show-modal align-center" data-modal=".modalWindow">
+                        <img src="./Creative Design Demo_files/4-1280x851.jpg" alt="Mobirise">
+                        <div class="icon-wrap">
+                            <span class="mbr-iconfont socicon-youtube socicon" style="color: rgb(255, 255, 255); fill: rgb(255, 255, 255);"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="modalWindow" style="display: none;">
+            <div class="modalWindow-container">
+                <div class="modalWindow-video-container">
+                    <div class="modalWindow-video">
+                        <iframe width="100%" height="100%" frameborder="0" allowfullscreen="1" src="./Creative Design Demo_files/VA8PzkQa8d8.html"></iframe>
+                    </div>
+                    <a class="close" role="button" data-dismiss="modal" data-bs-dismiss="modal">
+                        <span aria-hidden="true" class="mbr-iconfont mobi-mbri-close mobi-mbri closeModal"></span>
+                        <span class="sr-only visually-hidden">Close</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="people1 cid-sKtGDtAsma" id="people1-h">
+    
+    
+	
+    <div class="mbr-white container-fluid">
+        <div class="mbr-section-head">
+            <h4 class="mbr-section-title mbr-fonts-style mb-4 display-2">
+                <p class="mbr-white title-text">What<strong> Our </strong>Users<strong> </strong>Say</p>
+            </h4>
+        </div>
+        <div class="row">
+            <div class="сol-12 col-lg-4 item">
+                <div class="icon-box" style="transform: scale(1,-1)">
+								<span class="mbr-iconfont mbrib-quote-left mobi-mbri" style="font-size: 52px; color: #FF5753; fill: #FF5753;"></span>
+                </div>
+                <div class="item-wrapper">
+                    <div class="item-content">
+                        <p class="mbr-text mbr-fonts-style mb-2 display-4">
+                            Laoreet non curabitur gravida arcu ac tortor dignissim convallis aenean. Varius duis at consectetur lorem donec massa sapien faucibus et. Eu nisl nunc mi ipsum faucibus vitae aliquet. In ante metus dictum at. A diam maecenas sed enim. Enim diam vulputate ut pharetra sit amet.
+                        </p>
+                        <h5 class="item-title mbr-fonts-style mb-3 display-2">
+                            <strong>Smith</strong><br>
+                            Alexa
+                        </h5>
+                        <h6 class="item-subtitle mbr-fonts-style mb-0 display-7">
+                            <strong>DESIGNER</strong>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item сol-12 col-lg-4">
+                <div class="icon-box" style="transform: scale(1,-1)">
+								<span class="mbr-iconfont mbrib-quote-left mobi-mbri" style="font-size: 52px; color: #FF5753; fill: #FF5753;"></span>
+                </div>
+                <div class="item-wrapper">
+                    <div class="item-content">
+
+                        <p class="mbr-text mbr-fonts-style mb-2 display-4">
+                            Dictum at tempor commodo ullamcorper a. Vel orci porta non pulvinar neque laoreet suspendisse interdum. Egestas quis ipsum suspendisse ultrices gravida dictum fusce ut.
+                        </p>
+                        <h5 class="item-title mbr-fonts-style mb-3 display-2">
+                            <strong>Jones</strong><br>
+                            Linda
+                        </h5>
+                        <h6 class="item-subtitle mbr-fonts-style mb-0 display-7">
+                            <strong>DEVELOPER</strong>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="item сol-12 col-lg-4">
+                <div class="icon-box" style="transform: scale(1,-1)">
+								<span class="mbr-iconfont mbrib-quote-left mobi-mbri" style="font-size: 52px; color: #FF5753; fill: #FF5753;"></span>
+                </div>
+                <div class="item-wrapper">
+                    <div class="item-content">
+                        <p class="mbr-text mbr-fonts-style mb-2 display-4">
+                            Euismod in pellentesque massa placerat duis ultricies lacus sed turpis. Enim diam vulputate ut pharetra sit amet aliquam id. Velit scelerisque in dictum non consectetur a erat nam.
+                        </p>
+                        <h5 class="item-title mbr-fonts-style mb-3 display-2">
+                            <strong>Davis</strong><br>
+                            Alexa
+                        </h5>
+                        <h6 class="item-subtitle mbr-fonts-style mb-0 display-7">
+                           <strong>FREELANCER</strong>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="form1 cid-sKAC1m27o7" id="form1-t">
+    
+    
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+
+            <div class="form-container">
+                <div class="mbr-form form-wrapper" data-form-type="formoid">
+                    <div class="mbr-section-head mb-3">
+                        <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
+                            <p>Contacts</p>
+                        </h3>
+                        <p class="mbr-text mbr-white mbr-fonts-style mb-0 display-7">
+                            let's be in touch, write us a message.
+                        </p>
+                    </div>
+                    <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="rbyd2f44lQsx6JcmFzN6bRp10d5RR7Oj2AXZzxuN4ku1Ob7HRpH1D9txOqBXP0q+z4gk42tT/G5NAKUHdnvFFhjuTFyO6onTONIajUO4J6p4APsIyQ5O5mnpB3LBZHKm.fuXM57fmCuTscRMBMoO5f+kx+1vJ6n8cZSycv4DicXmseBvypFMZmGC8DZssPgt+m99HN7zFy4S4666tvN921eH4IIiguBwqk+JkRKqZD21kNiIEOhqV/nwKm4+gRqOT">
+                        <div class="row">
+                            <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out
+                                the form!</div>
+                            <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
+                                problem!</div>
+                        </div>
+                        <div class="dragArea row">
+                            <div class="col-md col-sm-12 form-group mb-3" data-for="name">
+                                <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-form1-t">
+                            </div>
+                            <div class="col-md col-sm-12 form-group mb-3" data-for="email">
+                                <input type="email" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-form1-t">
+                            </div>
+                            <div class="col-12 form-group mb-3" data-for="textarea">
+                            <textarea name="textarea" placeholder="Message" data-form-field="textarea" class="form-control form-textarea" id="textarea-form1-t"></textarea>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 mbr-section-btn">
+                                <button type="submit" class="btn btn-primary display-4">Send message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{%endblock%}

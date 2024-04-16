@@ -105,5 +105,8 @@ def addexperiance():
                                     class="form-control form-textarea" id="textarea-form1-t"></textarea>
                             </div>
                             <div id="dummyexperiance"></div>'''
+@app.route('/dashboard')
+def dashboard():
+    return render_template("DetailsForm.html")
 if __name__ == '__main__':
     app.run(debug=True)
