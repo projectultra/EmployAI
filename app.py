@@ -97,32 +97,32 @@ def addeducation():
                                 </div>
                                 <div id="dummyeducation"></div>'''
                             
-@app.route('/addexperiance')
-def addexperiance():
-    session['experiance']=session['experiance']+1
+@app.route('/addexperience')
+def addexperience():
+    session['experience']=session['experience']+1
     return f'''<div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                                <input type="text" name="workName{session['experiance']}" placeholder="Designation" data-form-field="name"
-                                    class="form-control" value="" id="workName{session['experiance']}">
+                                <input type="text" name="workName{session['experience']}" placeholder="Designation" data-form-field="name"
+                                    class="form-control" value="" id="workName{session['experience']}">
                             </div>
-                            <div class="col-md col-sm-12 form-group mb-3" data-for="start-date{session['experiance']}">
-                                <input type="text" name="start-date{session['experiance']}" placeholder="Start-date" 
-                                    class="form-control" value="" id="start-date{session['experiance']}">
+                            <div class="col-md col-sm-12 form-group mb-3" data-for="start-date{session['experience']}">
+                                <input type="text" name="start-date{session['experience']}" placeholder="Start-date" 
+                                    class="form-control" value="" id="start-date{session['experience']}">
                                     
                             </div>
                             <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                <input type="text" name="end-date{session['experiance']}" placeholder="End-date" data-form-field="end-date{session['experiance']}"
-                                    class="form-control" value="" id="end-date{session['experiance']}">
+                                <input type="text" name="end-date{session['experience']}" placeholder="End-date" data-form-field="end-date{session['experience']}"
+                                    class="form-control" value="" id="end-date{session['experience']}">
                                     
                             </div>
-                            <div class="col-12 form-group mb-3" data-for="orgName{session['experiance']}">
-                                <input type="text" name="orgName{session['experiance']}" placeholder="Organization Name" 
-                                    class="form-control" value="" id="orgName{session['experiance']}">
+                            <div class="col-12 form-group mb-3" data-for="orgName{session['experience']}">
+                                <input type="text" name="orgName{session['experience']}" placeholder="Organization Name" 
+                                    class="form-control" value="" id="orgName{session['experience']}">
                             </div>
-                            <div class="col-12 form-group mb-3" data-for="details{session['experiance']}">
-                                <textarea name="details{session['experiance']}" placeholder="Work Experiance" data-form-field="textarea"
-                                    class="form-control form-textarea" id="details{session['experiance']}"></textarea>
+                            <div class="col-12 form-group mb-3" data-for="details{session['experience']}">
+                                <textarea name="details{session['experience']}" placeholder="Work experience" data-form-field="textarea"
+                                    class="form-control form-textarea" id="details{session['experience']}"></textarea>
                             </div>
-                            <div id="dummyexperiance"></div>'''
+                            <div id="dummyexperience"></div>'''
 @app.route('/details', methods=['POST'])
 def details():
     form_data=request.form
@@ -172,7 +172,7 @@ def details():
 @app.route('/dashboard')
 def dashboard():
     session['education']=1
-    session['experiance']=1
+    session['experience']=1
     session['link']=0
     return render_template("DetailsForm.html")
 
