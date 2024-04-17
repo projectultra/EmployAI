@@ -1,16 +1,18 @@
 import replicate
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from flask_pymongo import PyMongo
 app = Flask(__name__)
-app.config['MONGO_URI'] = 'mongodb://newuser:test123@cluster0.jigcmlg.mongodb.net/?retryWrites=true&w=majority/'
+app.secret_key="hehe"
+app.config['MONGO_URI'] = 'mongodb+srv://newuser:test123@cluster0.jigcmlg.mongodb.net/user_details?retryWrites=true&w=majority'
 os.environ["REPLICATE_API_TOKEN"] = "r8_Ofc4U8n0bodAQLZyxVtQ8f5S7KemqwL2BOPvn"  # Replace with your API token
+app.config['MONGO_DBNAME']='user_details'
+client = PyMongo(app)
 
-# client = PyMongo(app)
-# user= client.db.user
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    test=user.insert_one({'name':'test'})
+    test=client.db.user
+    test.insert_one({'h':'k'}).inserted_id
     if request.method == 'POST':
         user_name = request.form['user_name']
         company = request.form['company']
@@ -115,11 +117,19 @@ def details():
         print(key," : ",request.form[key])
     dict = {}
     dict['name'] = request.args.get('name')
-    insert_doc = collection.insert_one(list)
+    data=client.db.user
+    data.insert_one(request.form.to_dict())
     
     return dict
 @app.route('/dashboard')
 def dashboard():
+    session['education']=0
+    session['experiance']=0
     return render_template("DetailsForm.html")
+
+@app.route('/login')
+
+def authentication():
+    return render_template("login.html")
 if __name__ == '__main__':
     app.run(debug=True)
