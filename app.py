@@ -85,8 +85,8 @@ def addeducation():
                                 class="form-control" value="" id="email-form1-t">
                             </div>'''
                             
-@app.route('/addexperiance')
-def addexperiance():
+@app.route('/addexperience')
+def addexperience():
     return '''<div class="col-md col-sm-12 form-group mb-3" data-for="name">
                                 <input type="text" name="name" placeholder="Designation" data-form-field="name"
                                     class="form-control" value="" id="name-form1-t">
@@ -106,10 +106,10 @@ def addexperiance():
                                     class="form-control" value="" id="name-form1-t">
                             </div>
                             <div class="col-12 form-group mb-3" data-for="textarea">
-                                <textarea name="textarea" placeholder="Work Experiance" data-form-field="textarea"
+                                <textarea name="textarea" placeholder="Work Experience" data-form-field="textarea"
                                     class="form-control form-textarea" id="textarea-form1-t"></textarea>
                             </div>
-                            <div id="dummyexperiance"></div>'''
+                            <div id="dummyexperience"></div>'''
 @app.route('/details', methods=['POST'])
 def details():
     list=request.form
@@ -124,7 +124,7 @@ def details():
 @app.route('/dashboard')
 def dashboard():
     session['education']=0
-    session['experiance']=0
+    session['experience']=0
     return render_template("DetailsForm.html")
 
 @app.route('/login')
