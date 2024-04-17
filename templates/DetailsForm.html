@@ -150,7 +150,7 @@
 {%extends 'base.html'%}
 {%block content%}
     <section data-bs-version="5.1" class="form1 cid-sKAC1m27o7" id="form1-t">
-        <form>
+        <form id="UserDetails">
 
             <div class="container-fluid">
                 <div class="row justify-content-center">
@@ -203,20 +203,20 @@
                             </div>
 
                             <div class="dragArea row">
-                                <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                                    <input type="text" name="name" placeholder="Standard/Degree" data-form-field="name"
-                                        class="form-control" value="" id="name-form1-t">
+                                <div class="col-md col-sm-12 form-group mb-3" data-for="DegreeName1">
+                                    <input type="text" name="" placeholder="Standard/Degree" data-form-field="name"
+                                        class="form-control" value="" id="DegreeName1">
                                 </div>
                                 <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="Percentage/CGPA"
-                                        data-form-field="email" class="form-control" value="" id="email-form1-t">
+                                    <input type="text" name="percentage" placeholder="Percentage/CGPA"
+                                         class="form-control" value="" id="percentage">
                                 </div>
                                 <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                                    <input type="email" name="email" placeholder="year of completion"
+                                    <input type="text" name="year_of_completion" placeholder="year of completion"
                                         data-form-field="email" class="form-control" value="" id="email-form1-t">
                                 </div>
                                 <div class="col-12 form-group mb-3" data-for="textarea">
-                                    <input type="email" name="email" placeholder="College/School Name"
+                                    <input type="   text" name="collegeName" placeholder="College/School Name"
                                         data-form-field="email" class="form-control" value="" id="email-form1-t">
                                 </div>
                                 <div id="dummyeducation"></div>
@@ -305,8 +305,8 @@
                                     </div>
                                     <div class="item__buttons-container mt-3">
                                         <div class="mbr-section-btn item__button"><p
-                                                class="btn btn-info-outline display-4" onclick="addSkill()">Add
-                                                Skill</p></div>
+                                                class="btn btn-info-outline display-4" onclick="addSkill()">Add Skill</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -356,6 +356,7 @@
 
                     </div>
                 </div> -->
+                <button hx-post="/details"hx-swap="none">Submit</button>
         </form>
     </section>
 {%endblock%}

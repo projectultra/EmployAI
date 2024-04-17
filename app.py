@@ -1,13 +1,16 @@
 import replicate
 import os
 from flask import Flask, render_template, request
-
+from flask_pymongo import PyMongo
 app = Flask(__name__)
-
+app.config['MONGO_URI'] = 'mongodb://newuser:test123@cluster0.jigcmlg.mongodb.net/?retryWrites=true&w=majority/'
 os.environ["REPLICATE_API_TOKEN"] = "r8_Ofc4U8n0bodAQLZyxVtQ8f5S7KemqwL2BOPvn"  # Replace with your API token
 
+# client = PyMongo(app)
+# user= client.db.user
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    test=user.insert_one({'name':'test'})
     if request.method == 'POST':
         user_name = request.form['user_name']
         company = request.form['company']
@@ -105,6 +108,16 @@ def addexperiance():
                                     class="form-control form-textarea" id="textarea-form1-t"></textarea>
                             </div>
                             <div id="dummyexperiance"></div>'''
+@app.route('/details', methods=['POST'])
+def details():
+    list=request.form
+    for key in request.form:
+        print(key," : ",request.form[key])
+    dict = {}
+    dict['name'] = request.args.get('name')
+    insert_doc = collection.insert_one(list)
+    
+    return dict
 @app.route('/dashboard')
 def dashboard():
     return render_template("DetailsForm.html")
