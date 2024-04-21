@@ -225,6 +225,14 @@ def interview():
 def interview_submit():
     if request.method=='POST':
         job_description = request.form['job_description']
-        company_name = request.form['company_name']
+        role= request.form['role']
+
+
+@app.route('/cv-generator')
+def cv_generator():
+    if(request.method=='POST'):
+        pass
+    return render_template('cv_generator.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
