@@ -21,7 +21,7 @@ def index():
     if 'user_id' not in session:
         return redirect(url_for('loggin'))
     test=client.db.user
-    test.insert_one({'h':'k'}).inserted_id
+   
     if request.method == 'POST':
         user_name = request.form['user_name']
         company = request.form['company']
@@ -57,9 +57,7 @@ def index():
 
     return render_template('index.html')
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
+
 
 @app.route('/addlink')
 def addlink():
@@ -169,8 +167,12 @@ def details():
     {'_id': user_id},
     {'$set': {'details': details}})
     return dict
+
+
 @app.route('/dashboard')
 def dashboard():
+    if 'user_id' not in session:
+        return redirect(url_for('loggin'))
     session['education']=1
     session['experience']=1
     session['link']=0
@@ -207,14 +209,22 @@ def siggnin():
         hashed_password = generate_password_hash(password)
         if client.db.user.find_one({'email': email}):
             return render_template('login.html', error='Email already registered.')
-       
         session['logged_in'] = True
         client.db.user.insert_one({'email': email, 'password': hashed_password,'name':name})
         user=client.db.user.find_one({'email':email})
         session['user_id'] = str(user['_id'])
         return redirect(url_for('index'))
-    
     return render_template('login.html')
 
+
+@app.route('/interview')
+def interview():
+    return render_template('interview.html')
+
+@app.route('/interview_submit')
+def interview_submit():
+    if request.method=='POST':
+        job_description = request.form['job_description']
+        company_name = request.form['company_name']
 if __name__ == '__main__':
     app.run(debug=True)

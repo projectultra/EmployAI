@@ -1,0 +1,47 @@
+{%extends 'base.html'%}
+{%block content%}
+
+
+<section data-bs-version="5.1" class="form1 cid-sKAC1m27o7" id="form1-t">
+    <form id="UserDetails" >
+
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+
+                <div class="form-container">
+                    <div class="mbr-form form-wrapper" data-form-type="formoid">
+                        <div class="mbr-section-head mb-3">
+                            <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
+                                <p>Get personalised interview Questions</p>
+                            </h3>
+
+                        </div>
+
+                        <div class="dragArea row">
+                            <div class="col-md col-sm-12 form-group mb-3" data-for="name">
+                                <input type="text" name="company_name" placeholder="Company name" data-form-field="name"
+                                    class="form-control" value="" id="name-form1-t">
+                            </div>
+                            
+                            <div class="col-12 form-group mb-3" data-for="textarea">
+                                <textarea name="job_description" placeholder="Elaborate about the job description" data-form-field="textarea"
+                                    class="form-control form-textarea" id="textarea-form1-t"></textarea>
+                            </div>
+                            
+                            <div class="item__buttons-container mt-3">
+                                <div class="mbr-section-btn item__button" hx-get="/interview_submit" hx-target="#dummylink"
+                                    hx-swap="outerHTML"><a class="btn btn-info-outline display-4">Submit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="dummylink"></div>
+            </div>
+        </div>
+
+
+            
+    </form>
+</section>
+{%endblock%}
