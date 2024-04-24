@@ -17,23 +17,19 @@ from redis.commands.search.query import Query
 from sentence_transformers import SentenceTransformer
 
 #connect to redis database
-hosting = 'local'
+hosting = 'cloud'
 if hosting == "cloud":
-	client = redis.Redis(
-	host='redis-18541.c305.ap-south-1-1.ec2.cloud.redislabs.com',
-	port=18541,
-	password='') #need to add github secrets
-elif hosting == "local":
-    client = redis.Redis(host="localhost", port=6379, decode_responses=True)
+    client = redis.Redis(
+    host='redis-16071.c264.ap-south-1-1.ec2.redns.redis-cloud.com',
+    port=16071,
+    password='iuz2JyKXJ2kqZ0xwKS1puMu4wr7khhVi') #need to add github secrets
 
 print(client.ping())
-
-#read the interview questions
 
 if True:
     df = pd.read_csv("df.csv")
     df.dropna(inplace=True)
-    
+    print(df.head())
     pipeline = client.pipeline()
     for index, row in df.iterrows():
         redis_key = f"{row['Type']}:{index:03}"
@@ -42,10 +38,9 @@ if True:
         json_text = json.dumps(data)
         pipeline.json().set(redis_key, "$", json.loads(json_text))
 
-pipeline.execute()
+    print(pipeline.execute())
 
 print(client.json().get("Common:000","$.Text"))
-
 
 keys = sorted(client.keys("Common:*"))
 questions = client.json().mget(keys, "$.Question")
@@ -54,21 +49,28 @@ fulltext = client.json().mget(keys, "$.Text")
 fulltext = [item for sublist in fulltext for item in sublist]
 
 
-model_name = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+# model_name = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+
+model_name = "jonaschris2103/tiny_llama_embedder"
 embedder = SentenceTransformer(model_name)
+
+# embedder.push_to_hub("tiny_llama_embedder")
 
 question_embeddings = embedder.encode(questions).astype(np.float32).tolist()
 text_embeddings = embedder.encode(fulltext).astype(np.float32).tolist()
 VECTOR_DIMENSION = len(question_embeddings[0])
-VECTOR_DIMENSION #expected 2048 for tinyllama
+print(VECTOR_DIMENSION) #expected 2048 for tinyllama
+
 
 
 pipeline = client.pipeline()
 for key, question_embedding, text_embedding in zip(keys, question_embeddings,text_embeddings):
     pipeline.json().set(key, "$.question_embeddings", question_embedding)
     pipeline.json().set(key, "$.text_embeddings", text_embedding)
-pipeline.execute()
-client.json().get("Common:010")
+
+print(pipeline.execute())
+
+print(client.json().get("Common:010"))
 
 schema = (
     TextField("$.Question", no_stem=True, as_name="Question"),
@@ -95,15 +97,16 @@ schema = (
     ),
 )
 
-definition = IndexDefinition(prefix=["Common:"], index_type=IndexType.JSON)
-res = client.ft("idx:double_vectors").create_index(
-    fields=schema, definition=definition)
-print(res)
+if False:
+    definition = IndexDefinition(prefix=["Common:"], index_type=IndexType.JSON)
+    res = client.ft("idx:double_vectors").create_index(
+        fields=schema, definition=definition)
+    print(res)
 
-info = client.ft("idx:double_vectors").info()
-num_docs = info["num_docs"]
-indexing_failures = info["hash_indexing_failures"]
-print(f"{num_docs} documents indexed with {indexing_failures} failures")
+    info = client.ft("idx:double_vectors").info()
+    num_docs = info["num_docs"]
+    indexing_failures = info["hash_indexing_failures"]
+    print(f"{num_docs} documents indexed with {indexing_failures} failures")
 
 
 query = (
@@ -113,10 +116,6 @@ query = (
      .dialect(2)
 )
 
-
-encoded_query = embedder.encode("Projects, Experience")
-result = client.ft("idx:double_vectors").search(query, { 'query_vector': np.array(encoded_query, dtype=np.float32).tobytes() })
-result
 
 
 def create_query_table(query, queries, encoded_queries, extra_params={}):
@@ -146,12 +145,6 @@ def create_query_table(query, queries, encoded_queries, extra_params={}):
                 }
             )
     return results_list
-
-
-#change 5 to no of results and @for the the vector field name from schema
-
-
-
 
 queries = [
     "Questions on projects, teamwork, collaboration, communication ",
