@@ -6,6 +6,7 @@ from flask_pymongo import PyMongo
 from werkzeug.security import generate_password_hash, check_password_hash
 import pymongo
 from flask_session import Session
+import interview_questions
 app = Flask(__name__)
 app.secret_key="hehe"
 app.config['MONGO_URI'] = 'mongodb+srv://newuser:test123@cluster0.jigcmlg.mongodb.net/user_details?retryWrites=true&w=majority'
@@ -226,6 +227,9 @@ def interview_submit():
     if request.method=='POST':
         job_description = request.form['job_description']
         role= request.form['role']
+    
+    output = interview_questions.question_answers(role,["Collaboration, Communication"],job_description)
+    return output    
 
 
 @app.route('/cv-generator')
