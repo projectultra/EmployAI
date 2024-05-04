@@ -8,19 +8,20 @@ Original file is located at
 """
 
 from huggingface_hub import notebook_login
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
 notebook_login()
 
 # Load model directly
-from transformers import AutoTokenizer, AutoModelForCausalLM
 
 tokenizer = AutoTokenizer.from_pretrained("google/gemma-2b-it")
 model = AutoModelForCausalLM.from_pretrained("google/gemma-2b-it")
 
 prompt = "Write me a job description for a Machine Learning Engineer Job"
 
-input = tokenizer.encode(prompt,return_tensors='pt')
+input = tokenizer.encode(prompt, return_tensors="pt")
 
-output = model.generate(input,max_length=1000)
+output = model.generate(input, max_length=1000)
 
 text = tokenizer.decode(output[0])
 

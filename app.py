@@ -1,36 +1,43 @@
-import replicate
 import os
-from bson.objectid import ObjectId
-from flask import Flask, render_template, request, session, url_for,redirect
-from flask_pymongo import PyMongo
-from werkzeug.security import generate_password_hash, check_password_hash
+
 import pymongo
+import replicate
+from bson.objectid import ObjectId
+from flask import Flask, redirect, render_template, request, session, url_for
+from flask_pymongo import PyMongo
 from flask_session import Session
+from werkzeug.security import check_password_hash, generate_password_hash
+
 import interview_questions
+
 app = Flask(__name__)
-app.secret_key="hehe"
-app.config['MONGO_URI'] = 'mongodb+srv://newuser:test123@cluster0.jigcmlg.mongodb.net/user_details?retryWrites=true&w=majority'
-os.environ["REPLICATE_API_TOKEN"] = "r8_Ofc4U8n0bodAQLZyxVtQ8f5S7KemqwL2BOPvn"  # Replace with your API token
-app.config['MONGO_DBNAME']='user_details'
-app.config['SESSION_TYPE'] = 'filesystem'
-app.config['SESSION_FILE_DIR'] = './.flask_session/'
+app.secret_key = "hehe"
+app.config["MONGO_URI"] = (
+    "mongodb+srv://newuser:test123@cluster0.jigcmlg.mongodb.net/user_details?retryWrites=true&w=majority"
+)
+# Replace with your API token
+os.environ["REPLICATE_API_TOKEN"] = "r8_Ofc4U8n0bodAQLZyxVtQ8f5S7KemqwL2BOPvn"
+app.config["MONGO_DBNAME"] = "user_details"
+app.config["SESSION_TYPE"] = "filesystem"
+app.config["SESSION_FILE_DIR"] = "./.flask_session/"
 Session(app)
 client = PyMongo(app)
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route("/", methods=["GET", "POST"])
 def index():
-    if 'user_id' not in session:
-        return redirect(url_for('loggin'))
-    test=client.db.user
-   
-    if request.method == 'POST':
-        user_name = request.form['user_name']
-        company = request.form['company']
-        manager = request.form['manager']
-        role = request.form['role']
-        referral = request.form['referral']
-        prompt_input = request.form['prompt_input']
-        temp = float(request.form['temp'])
+    if "user_id" not in session:
+        return redirect(url_for("loggin"))
+    test = client.db.user
+
+    if request.method == "POST":
+        user_name = request.form["user_name"]
+        company = request.form["company"]
+        manager = request.form["manager"]
+        role = request.form["role"]
+        referral = request.form["referral"]
+        prompt_input = request.form["prompt_input"]
+        temp = float(request.form["temp"])
 
         pre_prompt = "You are a helpful assistant. You do not respond as 'User' or pretend to be 'User'. You only respond once as 'Assistant'."
         prompt = f"The job description is: {prompt_input}\n"
@@ -49,21 +56,20 @@ def index():
                 "temperature": temp,
                 "max_new_tokens": 512,
                 "min_new_tokens": -1,
-                "repetition_penalty": 1
-            }
+                "repetition_penalty": 1,
+            },
         )
         print(response)
         generated_cover_letter = " ".join([item for item in response])
         return generated_cover_letter
 
-    return render_template('index.html')
+    return render_template("index.html")
 
 
-
-@app.route('/addlink')
+@app.route("/addlink")
 def addlink():
-    session['link']=session['link']+1
-    return f'''</div><br>
+    session["link"] = session["link"] + 1
+    return f"""</div><br>
 <div class="new-line">
     <div class="col-md col-sm-12 form-group mb-3" data-for="name">
         <input type="text" name="linkName{session['link']}" placeholder="Link Name(linkedin..)" data-form-field="name" class="form-control" value="" id="name-form1-t">
@@ -73,12 +79,13 @@ def addlink():
     <div class="col-md col-sm-12 form-group mb-3" data-for="email">
         <input type="test" name="link{session['link']}" placeholder="Link" data-form-field="email" class="form-control" value="" id="email-form1-t">
     </div>
-</div><div id="dummylink">'''
+</div><div id="dummylink">"""
 
-@app.route('/addeducation')
+
+@app.route("/addeducation")
 def addeducation():
-    session['education']=session['education']+1
-    return f'''<br><div class="col-md col-sm-12 form-group mb-3" data-for="DegreeName1">
+    session["education"] = session["education"] + 1
+    return f"""<br><div class="col-md col-sm-12 form-group mb-3" data-for="DegreeName1">
                                     <input type="text" name="degreeName{session['education']}" placeholder="Standard/Degree" data-form-field="name"
                                         class="form-control" value="" id="DegreeName1">
                                 </div>
@@ -94,12 +101,13 @@ def addeducation():
                                     <input type="   text" name="collegeName{session['education']}" placeholder="College/School Name"
                                         data-form-field="collegeName{session['education']}"" class="form-control" value="" id="collegeName{session['education']}"">
                                 </div>
-                                <div id="dummyeducation"></div>'''
-                            
-@app.route('/addexperience')
+                                <div id="dummyeducation"></div>"""
+
+
+@app.route("/addexperience")
 def addexperience():
-    session['experience']=session['experience']+1
-    return f'''<div class="col-md col-sm-12 form-group mb-3" data-for="name">
+    session["experience"] = session["experience"] + 1
+    return f"""<div class="col-md col-sm-12 form-group mb-3" data-for="name">
                                 <input type="text" name="workName{session['experience']}" placeholder="Designation" data-form-field="name"
                                     class="form-control" value="" id="workName{session['experience']}">
                             </div>
@@ -121,122 +129,138 @@ def addexperience():
                                 <textarea name="details{session['experience']}" placeholder="Work experience" data-form-field="textarea"
                                     class="form-control form-textarea" id="details{session['experience']}"></textarea>
                             </div>
-                            <div id="dummyexperience"></div>'''
-@app.route('/details', methods=['POST'])
+                            <div id="dummyexperience"></div>"""
+
+
+@app.route("/details", methods=["POST"])
 def details():
-    form_data=request.form
+    form_data = request.form
     for key in request.form:
-        print(key," : ",request.form[key])
+        print(key, " : ", request.form[key])
     dict = {}
-    dict['name'] = request.args.get('name')
-    data=client.db.user
+    dict["name"] = request.args.get("name")
+    data = client.db.user
     details = {
-    'personal_details': {
-        'name': form_data['name'],
-        'address': form_data['textarea'],
-        'email': form_data['email'],
-        'link': {}
-    },
-    'education': {},
-    'experience': {}
+        "personal_details": {
+            "name": form_data["name"],
+            "address": form_data["textarea"],
+            "email": form_data["email"],
+            "link": {},
+        },
+        "education": {},
+        "experience": {},
     }
 
     # Iterate over form_data keys to find link, education, and experience entries dynamically
     for key in form_data.keys():
-        if key.startswith('link'):
-            link_num = key.replace('link', '')  # Extract the link number
-            details['personal_details']['link'][f'link{link_num}'] = form_data[key]
-        elif key.startswith('degreeName'):
-            education_num = key.replace('degreeName', '')  # Extract the education number
-            details['education'][f'education{education_num}'] = {
-                'degreeName': form_data[f'degreeName{education_num}'],
-                'percentage': form_data[f'percentage{education_num}'],
-                'year_of_completion': form_data[f'year_of_completion{education_num}'],
-                'collegeName': form_data[f'collegeName{education_num}']
+        if key.startswith("link"):
+            link_num = key.replace("link", "")  # Extract the link number
+            details["personal_details"]["link"][f"link{link_num}"] = form_data[key]
+        elif key.startswith("degreeName"):
+            # Extract the education number
+            education_num = key.replace("degreeName", "")
+            details["education"][f"education{education_num}"] = {
+                "degreeName": form_data[f"degreeName{education_num}"],
+                "percentage": form_data[f"percentage{education_num}"],
+                "year_of_completion": form_data[f"year_of_completion{education_num}"],
+                "collegeName": form_data[f"collegeName{education_num}"],
             }
-        elif key.startswith('workName'):
-            experience_num = key.replace('workName', '')  # Extract the experience number
-            details['experience'][f'experience{experience_num}'] = {
-                'workName': form_data[f'workName{experience_num}'],
-                'start-date': form_data[f'start-date{experience_num}'],
-                'end-date': form_data[f'end-date{experience_num}'],
-                'orgName': form_data[f'orgName{experience_num}'],
-                'details': form_data[f'details{experience_num}']
+        elif key.startswith("workName"):
+            # Extract the experience number
+            experience_num = key.replace("workName", "")
+            details["experience"][f"experience{experience_num}"] = {
+                "workName": form_data[f"workName{experience_num}"],
+                "start-date": form_data[f"start-date{experience_num}"],
+                "end-date": form_data[f"end-date{experience_num}"],
+                "orgName": form_data[f"orgName{experience_num}"],
+                "details": form_data[f"details{experience_num}"],
             }
-    user_id = ObjectId(session['user_id'])
-    result = data.update_one(
-    {'_id': user_id},
-    {'$set': {'details': details}})
+    user_id = ObjectId(session["user_id"])
+    result = data.update_one({"_id": user_id}, {"$set": {"details": details}})
     return dict
 
 
-@app.route('/dashboard')
+@app.route("/dashboard")
 def dashboard():
-    if 'user_id' not in session:
-        return redirect(url_for('loggin'))
-    session['education']=1
-    session['experience']=1
-    session['link']=0
+    if "user_id" not in session:
+        return redirect(url_for("loggin"))
+    session["education"] = 1
+    session["experience"] = 1
+    session["link"] = 0
     return render_template("DetailsForm.html")
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route("/login", methods=["GET", "POST"])
 def loggin():
-    if request.method == 'POST':
-        email = request.form['email']
-        password = request.form['password']
-        user = client.db.user.find_one({'email': email})
-        if(user):
-            if user and check_password_hash(user['password'], password):
-                session['user_id'] = str(user['_id'])
-                session['logged_in'] = True
-                return redirect(url_for('index'))
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+        user = client.db.user.find_one({"email": email})
+        if user:
+            if user and check_password_hash(user["password"], password):
+                session["user_id"] = str(user["_id"])
+                session["logged_in"] = True
+                return redirect(url_for("index"))
             else:
                 # Increment failed login attempt count and lock out account if necessary
-                client.db.user.update_one({'email': email}, {'$inc': {'failed_attempts': 1}})
-                user = client.db.user.find_one({'email': email})
-                if user['failed_attempts'] >= 5:
-                    client.db.user.update_one({'email': email}, {'$set': {'is_locked': True}})
-                    return render_template('login.html', error='Your account has been locked due to too many failed login attempts. Please reset your password.')
-                return render_template('login.html', error='Invalid email or password.')
-    return render_template('login.html')
+                client.db.user.update_one(
+                    {"email": email}, {"$inc": {"failed_attempts": 1}}
+                )
+                user = client.db.user.find_one({"email": email})
+                if user["failed_attempts"] >= 5:
+                    client.db.user.update_one(
+                        {"email": email}, {"$set": {"is_locked": True}}
+                    )
+                    return render_template(
+                        "login.html",
+                        error="Your account has been locked due to too many failed login attempts. Please reset your password.",
+                    )
+                return render_template("login.html", error="Invalid email or password.")
+    return render_template("login.html")
 
-@app.route('/signin',methods=['GET','POST'])
+
+@app.route("/signin", methods=["GET", "POST"])
 def siggnin():
-    if request.method == 'POST':
-        email = request.form['email']
-        name =request.form['name']
-        password = request.form['password']
+    if request.method == "POST":
+        email = request.form["email"]
+        name = request.form["name"]
+        password = request.form["password"]
         hashed_password = generate_password_hash(password)
-        if client.db.user.find_one({'email': email}):
-            return render_template('login.html', error='Email already registered.')
-        session['logged_in'] = True
-        client.db.user.insert_one({'email': email, 'password': hashed_password,'name':name})
-        user=client.db.user.find_one({'email':email})
-        session['user_id'] = str(user['_id'])
-        return redirect(url_for('index'))
-    return render_template('login.html')
+        if client.db.user.find_one({"email": email}):
+            return render_template("login.html", error="Email already registered.")
+        session["logged_in"] = True
+        client.db.user.insert_one(
+            {"email": email, "password": hashed_password, "name": name}
+        )
+        user = client.db.user.find_one({"email": email})
+        session["user_id"] = str(user["_id"])
+        return redirect(url_for("index"))
+    return render_template("login.html")
 
 
-@app.route('/interview')
+@app.route("/interview")
 def interview():
-    return render_template('interview.html')
+    return render_template("interview.html")
 
-@app.route('/interview_submit')
+
+@app.route("/interview_submit")
 def interview_submit():
-    if request.method=='POST':
-        job_description = request.form['job_description']
-        role= request.form['role']
-    
-    output = interview_questions.question_answers(role,["Collaboration, Communication"],job_description)
-    return output    
+    if request.method == "POST":
+        job_description = request.form["job_description"]
+        role = request.form["role"]
+
+    output = interview_questions.question_answers(
+        role, ["Collaboration, Communication"], job_description
+    )
+    return output
 
 
-@app.route('/cv-generator')
+@app.route("/cv-generator")
 def cv_generator():
-    if(request.method=='POST'):
+    if request.method == "POST":
         pass
-    return render_template('cv_generator.html')
+    return render_template("cv_generator.html")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app.run(debug=True)

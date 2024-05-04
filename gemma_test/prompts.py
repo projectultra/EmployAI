@@ -1,4 +1,4 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Load pre-trained tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained("google/gemma-2b-it")
@@ -14,7 +14,9 @@ prompt_a = "Generate a cover letter for the position of [Job Description] at [Co
 input_ids = tokenizer.encode(prompt_aa, return_tensors="pt")
 
 # Generate response
-outputs = model.generate(input_ids, max_length=2000, num_return_sequences=1, do_sample=True, temperature=0.98)
+outputs = model.generate(
+    input_ids, max_length=2000, num_return_sequences=1, do_sample=True, temperature=0.98
+)
 
 # Decode and print response
 response = tokenizer.decode(outputs[0], skip_special_tokens=True)
